@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
 	// print out the argv strings:
 	int i;
-	for(i=0; i < argc; i++) {
+	for (i=0; i < argc; i++) {
 		printf("Command line arg %2d: %s\n", i, argv[i]);
 	}
 	printf("\n");
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	// of command line arguments, if not, usually print an error message with
 	// some information on how to call this execuatable (what command line
 	// options it expects, and in which order), and then exit:
-	if(argc != 5) {
+	if (argc != 5) {
 		printf("usage: ./prog name age id_num gpa\n");
 		exit(1);
 	}
@@ -40,12 +40,12 @@ int main(int argc, char *argv[]) {
 	// string and modify it  (just to illustrate malloc, strlen, strcpy)
 
 	char *name = calloc( (strlen(argv[1])+1), sizeof(char) );
-	if(!name) { 
+	if (!name) { 
 		printf("Error: calloc failed....\n");
 		exit(1);
 	} 
 
-	if(strcpy(name, argv[1]) != NULL) { 
+	if (strcpy(name, argv[1]) != NULL) { 
 		printf("name: %s age: %ld id: %lld gpa: %3.2f\n", name, age, id, gpa);
 	} else { 
 		printf("Error: strcpy failed....\n");
