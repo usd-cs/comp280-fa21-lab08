@@ -1,14 +1,14 @@
 CC = gcc
 CFLAGS = -Wall -g -std=c11
 
-TARGETS = fileio commandlineargs calc-average-grades
+TARGETS = file-io command-line-args calc-average-grades
 
 all: $(TARGETS)
 
-fileio: fileio.c
+file-io: file-io.c
 	$(CC) $(CFLAGS) -o $@ $<
 
-commandlineargs: commandlineargs.c
+command-line-args: command-line-args.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 calc-average-grades: calc-average-grades.c
