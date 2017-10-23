@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 		char name[64];
 
 		// read first student info
-		ret = fscanf(infile, "%s%d%d", name, &num1, &num2); 
+		ret = fscanf(infile, "%s %d %d", name, &num1, &num2); 
 
 		int i = 0;
 		while ((i < num_students) && (ret == 3)) {  
