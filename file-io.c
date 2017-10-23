@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 			printf("line %d:  %10s %4d %4d\n", i, name, num1, num2);
 
 			// read next student's info
-			ret = fscanf(infile, "%s%d%d", name, &num1, &num2); 
+			ret = fscanf(infile, "%s %d %d", name, &num1, &num2); 
 
 			i++;
 		}
