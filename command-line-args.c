@@ -8,51 +8,49 @@
 #include <string.h>
 
 /**
+ * Simple program that gets information about a student from the command line
+ * arguments.
+ *
  * @param argc A count of the number of command line arguments, the executable 
  *       name (command) is included so argc is at least 1 for every program
  * @param argv An array of strings, there is one string for each command line arg
  */
 int main(int argc, char *argv[]) {
 
-	// print out the argv strings:
-	int i;
-	for (i=0; i < argc; i++) {
-		printf("Command line arg %2d: %s\n", i, argv[i]);
+	// Print out each of the command line arguments
+	for (int i = 0; i < argc; i++) {
+		printf("Command line arg %d: %s\n", i, argv[i]);
 	}
 	printf("\n");
 
-	// often times we want to check the the user passed in the correct number
-	// of command line arguments, if not, usually print an error message with
-	// some information on how to call this execuatable (what command line
-	// options it expects, and in which order), and then exit:
+	// It's good practice to check that the expected number of arguments were
+	// given when the program was run. If not, a "usage" message is printed
+	// and the program exits before trying to do anything else.
 	if (argc != 5) {
-		printf("usage: ./prog name age id_num gpa\n");
-		exit(1);
+		printf("usage: %s <name> <id in hexadecimal> <age> <gpa>\n", argv[0]);
+		exit(EXIT_FAILURE);
 	}
 
-	// strtol, strtoll, and strtod convert a string of numeric characters to
-	// the equivalent long, long long, or double value
-	long int age = strtol(argv[2], NULL, 10);
-	long long int id = strtoll(argv[3], NULL, 10);
+	// The strtoX (where X is l, ll, or d) are used to convert strings to
+	// numeric types.
+	
+	long int id = strtol(argv[2], NULL, 16);
 	double gpa = strtod(argv[4], NULL);
 
-	// Let's copy the name argument to a dynamically allocated 
-	// string and modify it  (just to illustrate malloc, strlen, strcpy)
+	// age doesn't need to be a long so we'll cast it to a regular int
+	int age = (int)strtol(argv[3], NULL, 10);
 
-	char *name = calloc( (strlen(argv[1])+1), sizeof(char) );
-	if (!name) { 
-		printf("Error: calloc failed....\n");
-		exit(1);
-	} 
-
-	if (strcpy(name, argv[1]) != NULL) { 
-		printf("name: %s age: %ld id: %lld gpa: %3.2f\n", name, age, id, gpa);
-	} else { 
-		printf("Error: strcpy failed....\n");
+	// Check that they didn't enter a negative age!
+	if (age < 0) {
+		printf("Invalid age entered!\n");
+		exit(EXIT_FAILURE);
 	}
 
-	free(name);
-	name = NULL;
+	printf("Student info:");
+	printf("\tName: %s\n", argv[1]);
+	printf("\tID: %ld\n", id);
+	printf("\tAge: %d\n", age);
+	printf("\tGPA: %f\n", gpa);
 
 	return 0;
 }
